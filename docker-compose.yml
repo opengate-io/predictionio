@@ -8,7 +8,7 @@ services:
      - 8000:8000
      - 7070:7070
      - 9000:9000
-     volumns:
+    volumes:
      - experiments:/opt/PredictionIO
     restart: always
   predictionio-database:

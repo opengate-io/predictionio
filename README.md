@@ -1,9 +1,9 @@
 # PredictionIO docker container (PredictionIO & Spark Only)
 Docker container for PredictionIO-based machine learning services
 
-[![Docker build](http://dockeri.co/image/cuongdd1/predictionio)](https://registry.hub.docker.com/u/cuongdd1/predictionio/)
+[![Docker build](http://dockeri.co/image/opengate/predictionio)](https://registry.hub.docker.com/u/opengate/predictionio/)
 
-[![image info](https://images.microbadger.com/badges/image/cuongdd1/predictionio.svg)](https:/microbadger.com/images/cuongdd1/predictionio) [![](https://images.microbadger.com/badges/version/cuongdd1/predictionio.svg)](http://microbadger.com/images/cuongdd1/predictionio "Get your own version badge on microbadger.com")
+[![image info](https://images.microbadger.com/badges/image/opengate/predictionio.svg)](https:/microbadger.com/images/opengate/predictionio) [![](https://images.microbadger.com/badges/version/opengate/predictionio.svg)](http://microbadger.com/images/opengate/predictionio "Get your own version badge on microbadger.com")
 
 [PredictionIO](https://prediction.io) is an open-source Machine Learning
 server for developers and data scientists to build and deploy predictive
@@ -23,7 +23,7 @@ $ docker run --name prediction-databse
 $ docker run -it -v $HOME/my-recommendation-src:/MyRecommendation 
 	-p 8000:8000 -p 7070:7070 -p 9000:9000 
 	--link prediction-databse:postgres
-	cuongdd1/predictionio /bin/bash
+	opengate/predictionio /bin/bash
 ```
 ------------------------
 

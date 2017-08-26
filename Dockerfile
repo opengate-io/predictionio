@@ -1,11 +1,9 @@
 FROM ubuntu
 MAINTAINER DUONG Dinh Cuong <cuong3ihut@gmail.com>
 
-ENV PIO_VERSION 0.10.0
+ENV PIO_VERSION 0.11.0
 ENV SPARK_VERSION 1.6.3
-ENV POSTGRES_VERSION 9.4-1204.jdbc41
-ENV ELASTICSEARCH_VERSION 1.7.5
-ENV HBASE_VERSION 1.2.4
+ENV POSTGRES_VERSION 42.1.4
 
 ENV PIO_HOME /PredictionIO-${PIO_VERSION}-incubating
 ENV PATH=${PIO_HOME}/bin:$PATH
@@ -24,6 +22,8 @@ RUN curl -O https://www.apache.org/dist/incubator/predictionio/${PIO_VERSION}-in
 COPY files/pio-env.sh ${PIO_HOME}/conf/pio-env.sh
 COPY files/bin/pio-start-all ${PIO_HOME}/bin/pio-start-all
 COPY files/bin/pio-stop-all ${PIO_HOME}/bin/pio-stop-all
+
+RUN wget https://jdbc.postgresql.org/download/postgresql-${POSTGRES_VERSION}.jar ${PIO_HOME}/lib
 
 RUN ln -s ${PIO_HOME} /PredictionIO \
     && chmod +x ${PIO_HOME}/bin/pio-stop-all \

@@ -34,6 +34,7 @@ RUN ln -s ${PIO_HOME} /PredictionIO \
 RUN curl -O https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP-VERSION}.tgz \
     && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP-VERSION}.tgz -C ${PIO_HOME}/vendors \
     && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP-VERSION}.tgz
+COPY files/spart-env.sh ${PIO_HOME}/vendors/spark-${SPARK_VERSION}-bin-hadoop${HADOOP-VERSION}/conf/spart-env.sh
 
 #triggers fetching the complete sbt environment
 RUN ${PIO_HOME}/sbt/sbt -batch && pip install --upgrade pip && pip install setuptools && pip install predictionio

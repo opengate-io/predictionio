@@ -1,7 +1,7 @@
 version: '2'
 services:  
   predictionio-engine:
-    image: cuongdd1/predictionio:latest
+    image: opengate/predictionio:latest
     depends_on:     
      - predictionio-database
     ports:

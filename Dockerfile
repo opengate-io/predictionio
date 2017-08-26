@@ -36,6 +36,7 @@ RUN curl -O https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-$
 #triggers fetching the complete sbt environment
 RUN ${PIO_HOME}/sbt/sbt -batch
 
+VOLUME /PredictionIO/conf
 VOLUME /opt/PredictionIO
 WORKDIR /opt/PredictionIO/
 

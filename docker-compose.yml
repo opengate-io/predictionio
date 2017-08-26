@@ -9,7 +9,7 @@ services:
      - 7070:7070
      - 9000:9000
     volumes:
-     - experiments:/opt/PredictionIO
+     - ./experiments:/opt/PredictionIO
     restart: always
   predictionio-database:
     image: postgres:9.4

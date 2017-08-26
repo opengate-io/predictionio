@@ -34,7 +34,7 @@ RUN curl -O https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-$
     && rm spark-${SPARK_VERSION}-bin-hadoop2.6.tgz
 
 #triggers fetching the complete sbt environment
-RUN ${PIO_HOME}/sbt/sbt -batch
+RUN ${PIO_HOME}/sbt/sbt -batch && pip install --upgrade pip && pip install setuptools && pip install predictionio
 
 VOLUME /PredictionIO/conf
 VOLUME /opt/PredictionIO

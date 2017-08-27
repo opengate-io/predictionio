@@ -9,6 +9,10 @@ ENV HADOOP_VERSION 2.6
 ENV PIO_HOME /PredictionIO-${PIO_VERSION}-incubating
 ENV PATH=${PIO_HOME}/bin:$PATH
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
+ENV SPARK_MASTER_IP spark-cluster-ip.pickover.one
+ENV SPARK_MASTER_PORT 7077
+ENV SPARK_DRIVER_MEMORY 4G
+ENV SPARK_EXECUTOR_MEMORY 8G
 
 RUN apt-get update \
     && apt-get install -y --auto-remove --no-install-recommends curl openjdk-8-jdk libgfortran3 python-pip \
@@ -24,12 +28,14 @@ RUN curl -O https://www.apache.org/dist/incubator/predictionio/${PIO_VERSION}-in
 COPY files/pio-env.sh ${PIO_HOME}/conf/pio-env.sh
 COPY files/bin/pio-start-all ${PIO_HOME}/bin/pio-start-all
 COPY files/bin/pio-stop-all ${PIO_HOME}/bin/pio-stop-all
+COPY files/bin/pio-train ${PIO_HOME}/bin/pio-train
 
 RUN wget https://jdbc.postgresql.org/download/postgresql-${POSTGRES_VERSION}.jar ${PIO_HOME}/lib
 
 RUN ln -s ${PIO_HOME} /PredictionIO \
     && chmod +x ${PIO_HOME}/bin/pio-stop-all \
-    && chmod +x ${PIO_HOME}/bin/pio-start-all
+    && chmod +x ${PIO_HOME}/bin/pio-start-all \
+    && chmod +x ${PIO_HOME}/bin/pio-train
 
 RUN curl -O https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP-VERSION}.tgz \
     && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP-VERSION}.tgz -C ${PIO_HOME}/vendors \

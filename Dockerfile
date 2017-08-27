@@ -29,6 +29,10 @@ COPY files/bin/pio-start-all ${PIO_HOME}/bin/pio-start-all
 COPY files/bin/pio-stop-all ${PIO_HOME}/bin/pio-stop-all
 COPY files/bin/pio-train ${PIO_HOME}/bin/pio-train
 
+RUN curl -O https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz \
+    && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz -C ${PIO_HOME}/vendors/ \
+    && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP_VERSION}.tgz
+
 RUN wget https://jdbc.postgresql.org/download/postgresql-${POSTGRES_VERSION}.jar -P ${PIO_HOME}/lib/
 
 RUN ln -s ${PIO_HOME} /PredictionIO \

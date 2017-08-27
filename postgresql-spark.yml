@@ -1,6 +1,6 @@
 version: '2'
 services:  
-  predictionio-database:
+  postgresql:
     image: postgres:9.4
     environment:
      - POSTGRES_USER=postgres
@@ -15,9 +15,17 @@ services:
   spark-master:
     image: opengate/spark-master
     environment:
+     - SPARK_MASTER_IP=spark-master
      - SPARK_DRIVER_MEMORY=4G
-     - SPARK_WORKER_MEMORY=4G
-     - SPARK_EXECUTOR_MEMORY=8G
     ports:
      - 7077:7077
-    restart: always
+     - 8080:8080
+  spark-slave:
+    image: opengate/spark-slave
+    depends_on:     
+     - spark-master
+    environment:
+     - SPARK_MASTER_IP=spark-master
+     - SPARK_MASTER_PORT=7077
+     - SPARK_WORKER_MEMORY=4G
+     - SPARK_EXECUTOR_MEMORY=8G

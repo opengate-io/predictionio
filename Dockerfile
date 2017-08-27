@@ -1,4 +1,4 @@
-FROM ubuntu
+FROM openjdk:8-jdk
 MAINTAINER DUONG Dinh Cuong <cuong3ihut@gmail.com>
 
 ENV PIO_VERSION 0.11.0
@@ -15,7 +15,7 @@ ENV SPARK_DRIVER_MEMORY 4G
 ENV SPARK_EXECUTOR_MEMORY 8G
 
 RUN apt-get update \
-    && apt-get install -y --auto-remove --no-install-recommends curl wget openjdk-8-jdk libgfortran3 python-pip \
+    && apt-get install -y --auto-remove --no-install-recommends curl wget libgfortran3 python-pip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -35,10 +35,6 @@ RUN ln -s ${PIO_HOME} /PredictionIO \
     && chmod +x ${PIO_HOME}/bin/pio-stop-all \
     && chmod +x ${PIO_HOME}/bin/pio-start-all \
     && chmod +x ${PIO_HOME}/bin/pio-train
-
-RUN curl -O https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP-VERSION}.tgz \
-    && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP-VERSION}.tgz -C ${PIO_HOME}/vendors \
-    && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP-VERSION}.tgz
 
 #triggers fetching the complete sbt environment
 RUN ${PIO_HOME}/sbt/sbt -batch && pip install --upgrade pip && pip install setuptools && pip install predictionio

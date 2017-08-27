@@ -24,7 +24,7 @@ services:
      - 5432:5432
     restart: always
   spark-master:
-    image: opengate/spark:1.6.3
+    image: opengate/spark-master
     environment:
      - SPARK_DRIVER_MEMORY=4G
      - SPARK_WORKER_MEMORY=4G

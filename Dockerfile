@@ -24,6 +24,7 @@ RUN curl -O https://www.apache.org/dist/incubator/predictionio/${PIO_VERSION}-in
     && ./make-distribution.sh \
     && tar zxvf PredictionIO-${PIO_VERSION}-incubating.tar.gz -C / && mkdir -p ${PIO_HOME}/vendors \
     && rm -rf /apache-predictionio-${PIO_VERSION}-incubating
+    
 COPY files/pio-env.sh ${PIO_HOME}/conf/pio-env.sh
 COPY files/bin/pio-start-all ${PIO_HOME}/bin/pio-start-all
 COPY files/bin/pio-stop-all ${PIO_HOME}/bin/pio-stop-all

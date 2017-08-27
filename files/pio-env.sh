@@ -43,7 +43,7 @@ POSTGRES_JDBC_DRIVER=$PIO_HOME/lib/postgresql-$POSTGRES_VERSION.jar
 # HBASE_CONF_DIR=$PIO_HOME/vendors/hbase-1.0.0/conf
 
 # Filesystem paths where PredictionIO uses as block storage.
-PIO_FS_BASEDIR=/opt/PredictionIO/.pio_store
+PIO_FS_BASEDIR=$STORAGE_BASEDIR/.pio_store
 PIO_FS_ENGINESDIR=$PIO_FS_BASEDIR/engines
 PIO_FS_TMPDIR=$PIO_FS_BASEDIR/tmp
 

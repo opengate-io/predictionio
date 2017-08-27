@@ -47,8 +47,8 @@ RUN ln -s ${PIO_HOME} /PredictionIO \
 #triggers fetching the complete sbt environment
 RUN ${PIO_HOME}/sbt/sbt -batch && pip install --upgrade pip && pip install setuptools && pip install predictionio
 
-VOLUME /opt/PredictionIO
-WORKDIR /opt/PredictionIO/
+VOLUME $STORAGE_BASEDIR
+WORKDIR $STORAGE_BASEDIR
 
 EXPOSE 8000 9000 7070
 

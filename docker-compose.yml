@@ -1,9 +1,12 @@
 version: '2'
 services:  
-  predictionio-engine:
+  predictionio:
     image: opengate/predictionio:latest
     depends_on:     
-     - predictionio-database
+     - postgresql
+    environment:
+    - SPARK_MASTER_IP=172.20.1.137
+    - POSTGRESQL_DATABASE=postgresql
     ports:
      - 8000:8000
      - 7070:7070
@@ -11,7 +14,7 @@ services:
     volumes:
      - ./experiments:/opt/PredictionIO
     restart: always
-  predictionio-database:
+  postgresql:
     image: postgres:9.4
     environment:
      - POSTGRES_USER=postgres
@@ -23,20 +26,3 @@ services:
     ports:
      - 5432:5432
     restart: always
-  spark-master:
-    image: opengate/spark-master
-    environment:
-     - SPARK_MASTER_IP=spark-master
-     - SPARK_DRIVER_MEMORY=4G
-    ports:
-     - 7077:7077
-     - 8080:8080
-  spark-slave:
-    image: opengate/spark-slave
-    depends_on:     
-     - spark-master
-    environment:
-     - SPARK_MASTER_IP=spark-master
-     - SPARK_MASTER_PORT=7077
-     - SPARK_WORKER_MEMORY=4G
-     - SPARK_EXECUTOR_MEMORY=8G

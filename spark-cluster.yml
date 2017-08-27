@@ -1,17 +1,5 @@
 version: '2'
-services:  
-  postgresql:
-    image: postgres:9.4
-    environment:
-     - POSTGRES_USER=postgres
-     - POSTGRES_PASSWORD=predictionio
-     - POSTGRES_DB=postgresql
-     - PGDATA=/var/lib/postgresql/data
-    volumes:
-     - ../postgresql/data:/var/lib/postgresql/data
-    ports:
-     - 5432:5432
-    restart: always
+services:
   spark-master:
     image: opengate/spark-master
     environment:

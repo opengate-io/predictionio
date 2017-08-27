@@ -25,9 +25,9 @@
 
 # SPARK_HOME: Apache Spark is a hard dependency and must be configured.
 # SPARK_HOME=$PIO_HOME/vendors/spark-2.0.2-bin-hadoop2.7
-SPARK_HOME=$PIO_HOME/vendors/spark-1.6.3-bin-hadoop2.6
+SPARK_HOME=$PIO_HOME/vendors/spark-$SPARK_VERSION-bin-hadoop$HADOOP_VERSION
 
-POSTGRES_JDBC_DRIVER=$PIO_HOME/lib/postgresql-42.1.4.jar
+POSTGRES_JDBC_DRIVER=$PIO_HOME/lib/postgresql-$POSTGRES_VERSION.jar
 #MYSQL_JDBC_DRIVER=$PIO_HOME/lib/mysql-connector-java-5.1.41.jar
 
 # ES_CONF_DIR: You must configure this if you have advanced configuration for

@@ -1,1 +1,1 @@
-pio train -- --master spark://${SPARK_MASTER_IP}:${SPARK_MASTER_PORT} --driver-memory ${SPARK_DRIVER_MEMORY} --executor-memory ${SPARK_EXECUTOR_MEMORY}
+pio train -- --conf spark.akka.frameSize=1024 --master spark://${SPARK_MASTER_IP}:${SPARK_MASTER_PORT} --driver-memory ${SPARK_DRIVER_MEMORY} --executor-memory ${SPARK_EXECUTOR_MEMORY}

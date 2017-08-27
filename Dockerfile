@@ -15,14 +15,13 @@ ENV SPARK_DRIVER_MEMORY 4G
 ENV SPARK_EXECUTOR_MEMORY 8G
 
 RUN apt-get update \
-    && apt-get install -y --auto-remove --no-install-recommends curl openjdk-8-jdk libgfortran3 python-pip \
+    && apt-get install -y --auto-remove --no-install-recommends curl wget openjdk-8-jdk libgfortran3 python-pip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl -O https://www.apache.org/dist/incubator/predictionio/${PIO_VERSION}-incubating/apache-predictionio-${PIO_VERSION}-incubating.tar.gz \
     && tar -xvzf apache-predictionio-${PIO_VERSION}-incubating.tar.gz -C / && rm apache-predictionio-${PIO_VERSION}-incubating.tar.gz \
-    && cd apache-predictionio-${PIO_VERSION}-incubating \
-    && sh make-distribution.sh \
+    && ./make-distribution.sh \
     && tar zxvf PredictionIO-${PIO_VERSION}-incubating.tar.gz -C / && mkdir -p ${PIO_HOME}/vendors \
     && rm -rf /apache-predictionio-${PIO_VERSION}-incubating
 COPY files/pio-env.sh ${PIO_HOME}/conf/pio-env.sh
@@ -30,7 +29,7 @@ COPY files/bin/pio-start-all ${PIO_HOME}/bin/pio-start-all
 COPY files/bin/pio-stop-all ${PIO_HOME}/bin/pio-stop-all
 COPY files/bin/pio-train ${PIO_HOME}/bin/pio-train
 
-RUN wget https://jdbc.postgresql.org/download/postgresql-${POSTGRES_VERSION}.jar ${PIO_HOME}/lib
+RUN wget https://jdbc.postgresql.org/download/postgresql-${POSTGRES_VERSION}.jar -P ${PIO_HOME}/lib/
 
 RUN ln -s ${PIO_HOME} /PredictionIO \
     && chmod +x ${PIO_HOME}/bin/pio-stop-all \
@@ -40,7 +39,6 @@ RUN ln -s ${PIO_HOME} /PredictionIO \
 RUN curl -O https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/spark-${SPARK_VERSION}-bin-hadoop${HADOOP-VERSION}.tgz \
     && tar -xvzf spark-${SPARK_VERSION}-bin-hadoop${HADOOP-VERSION}.tgz -C ${PIO_HOME}/vendors \
     && rm spark-${SPARK_VERSION}-bin-hadoop${HADOOP-VERSION}.tgz
-COPY files/spart-env.sh ${PIO_HOME}/vendors/spark-${SPARK_VERSION}-bin-hadoop${HADOOP-VERSION}/conf/spart-env.sh
 
 #triggers fetching the complete sbt environment
 RUN ${PIO_HOME}/sbt/sbt -batch && pip install --upgrade pip && pip install setuptools && pip install predictionio

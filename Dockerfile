@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk
+FROM ubuntu
 MAINTAINER DUONG Dinh Cuong <cuong3ihut@gmail.com>
 
 ENV PIO_VERSION 0.11.0
@@ -15,7 +15,7 @@ ENV SPARK_DRIVER_MEMORY 4G
 ENV SPARK_EXECUTOR_MEMORY 8G
 
 RUN apt-get update \
-    && apt-get install -y --auto-remove --no-install-recommends curl wget libgfortran3 python-pip \
+    && apt-get install -y --auto-remove --no-install-recommends curl wget openjdk-8-jdk libgfortran3 python-pip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

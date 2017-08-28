@@ -19,7 +19,7 @@ ENV SPARK_DRIVER_MEMORY 4G
 ENV SPARK_EXECUTOR_MEMORY 8G
 
 RUN apt-get update \
-    && apt-get install -y --auto-remove --no-install-recommends curl wget openjdk-8-jdk libgfortran3 python-pip \
+    && apt-get install -y --auto-remove --no-install-recommends curl wget openjdk-8-jdk libgfortran3 libatlas3-base libopenblas-base python-pip \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
@@ -45,7 +45,7 @@ RUN ln -s ${PIO_HOME} /PredictionIO \
     && chmod +x ${PIO_HOME}/bin/pio-train
 
 #triggers fetching the complete sbt environment
-RUN ${PIO_HOME}/sbt/sbt -batch && pip install --upgrade pip && pip install setuptools && pip install predictionio
+RUN ${PIO_HOME}/sbt/sbt -batch && pip install --upgrade pip && pip install setuptools && pip install pytz && pip install predictionio
 
 VOLUME $STORAGE_BASEDIR
 WORKDIR $STORAGE_BASEDIR

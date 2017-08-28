@@ -7,6 +7,8 @@ services:
     environment:
     - SPARK_MASTER_IP=$SPARK_MASTER_IP
     - POSTGRESQL_DATABASE=postgresql
+    - POSTGRESQL_USERNAME=postgres
+    - POSTGRESQL_PASSWORD=predictionio
     ports:
      - 8000:8000
      - 7070:7070
